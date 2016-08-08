@@ -44,7 +44,7 @@ if (request.getParameter("row1col1") != null) {
 		<base href="<%=basePath%>">
 		<title>Table Data</title>
 		<style type="text/css">
-table.table-data tr td.head {font-family: Calibri;font-weight: bold; text-align: center; background-color: #d0dce0}
+table.table-data tr.head td {font-family: Calibri;font-weight: bold; text-align: center; background-color: #d0dce0}
 table.table-data tr.row0 {width: 300px; text-align: left; background-color:#f5f5f5 }
 table.table-data tr.row1 {width: 300px; text-align: left; background-color:#d0dce0 }
 table.table-data tr.row td  {width: 300px; text-align: left;}
@@ -79,14 +79,14 @@ rsmd = rst.getMetaData();
 %>
 		<table class="table-data">
 			<tr class="head">
-				<td class="head" rowspan="2">Action</td>
+				<td rowspan="2">Action</td>
 <% for(int i=1;i<=rsmd.getColumnCount(); i++) { %>
-				<td class="head"><%=rsmd.getColumnName(i).toString() %></td>
+				<td><%=rsmd.getColumnName(i).toString() %></td>
 <% } %>
 			</tr>
-			<tr>
+			<tr class="head">
 <% for(int i=1;i<=rsmd.getColumnCount(); i++) { %>
-				<td class="head"><%=rsmd.getColumnTypeName(i) + "(" + rsmd.getColumnDisplaySize(i) + ")" %></td>
+				<td><%=rsmd.getColumnTypeName(i) + "(" + rsmd.getColumnDisplaySize(i) + ")" %></td>
 <% } %>
 			</tr>
 <% while(rst.next()) { %>
