@@ -45,9 +45,10 @@ if (request.getParameter("row1col1") != null) {
 		<title>Table Data</title>
 		<style type="text/css">
 table.table-data tr.head td {font-family: Calibri;font-weight: bold; text-align: center; background-color: #d0dce0}
-table.table-data tr.row0 {width: 300px; text-align: left; background-color:#f5f5f5 }
-table.table-data tr.row1 {width: 300px; text-align: left; background-color:#d0dce0 }
-table.table-data tr.row td  {width: 300px; text-align: left;}
+table.table-data tr.row td  { max-width: 300px; max-height:20px; text-align: left; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;}
+table.table-data tr.row0 {background-color:#f5f5f5 }
+table.table-data tr.row1 {background-color:#d0dce0 }
+textarea.all-data {width:300px; height:200px;}
 		</style>
 	</head>
 	<body bgcolor="#f5f5f5">
@@ -93,7 +94,7 @@ rsmd = rst.getMetaData();
 			<tr class="row row<%=num_rows % 2 %>" >
 				<td><a href="javascript:dRecord('deletedata.jsp?db=<%=db%>&table=<%=table%>&field=<%=rsmd.getColumnName(1) %>&val=<%=rst.getString(1) %>')"><img class="icon" src="./images/Delete.gif" alt="Delete Record"/></a></td>
 <% for(int i=1; i<=rsmd.getColumnCount(); i++) { %>
-				<td><%=rst.getString(i) %></td>
+				<td id="d-cell-<%=num_rows%>-<%=i%>" ondblclick="showAllCell('d-cell-<%=num_rows%>-<%=i%>');"><%=rst.getString(i) %></td>
 <% } %>
 			</tr>
 <%
@@ -102,9 +103,9 @@ rsmd = rst.getMetaData();
 %>
 			<tr>
 				<td><input type="submit" value="Delete" name="delete"></td>
-				<td style="width: 300px;font-family: Calibri;font-weight: bold; text-align: center; background-color: #d0dce0"><%=num_rows %>Row(s)</td>
+				<td><%=num_rows %>Row(s)</td>
 <% for(int i=1; i<rsmd.getColumnCount(); i++) { %>
-				<td style="width: 300px;font-family: Calibri;font-weight: bold; text-align: center; background-color: #d0dce0"></td>
+				<td></td>
 <% } %>
 			</tr>
 		</table>
@@ -134,4 +135,16 @@ rsmd = rst.getMetaData();
 			</table>
 		</form>
 	</body>
+<script type="text/javascript">
+var oldCellId = 'unknow';
+var odlCellHtml = '';
+function showAllCell(cellId) {
+	var oldCell = $("#" + oldCellId);
+	if (oldCell.html()) { oldCell.html(oldCellHtml); }
+	var cell = $("#" + cellId);
+	oldCellId = cellId;
+	oldCellHtml = cell.html();
+	cell.html("<textarea class='all-data' readonly=readonly>" + oldCellHtml + "</textarea>");
+};
+</script>
 </html>
