@@ -33,7 +33,7 @@
   <!-- If you define welcome files in your own application's web.xml        -->
   <!-- deployment descriptor, that list *replaces* the list configured      -->
   <!-- here, so be sure to include any of the default values that you wish  -->
-  <!-- to use within your application.                                       -->
+  <!-- to use within your application.                                      -->
 
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
@@ -45,5 +45,21 @@
 	<session-config>
       <session-timeout>120</session-timeout> 
     </session-config>
+
+	<!-- Authorization setting for SSL -->
+	<login-config>
+		<auth-method>CLIENT-CERT</auth-method>
+		<realm-name>Client Cert Users-only Area</realm-name>
+	</login-config>
+	<!-- Authorization setting for SSL -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>SSL</web-resource-name>
+			<url-pattern>/*</url-pattern>
+		</web-resource-collection>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
 
 </web-app>
