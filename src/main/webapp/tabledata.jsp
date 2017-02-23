@@ -41,6 +41,7 @@ if (request.getParameter("row1col1") != null) {
 <html>
 	<head>
 		<script language="javascript" src="confirm.js" type="text/javascript"></script>
+		<script language="javascript" src="jquery-3.1.0.min.js" type="text/javascript"></script>
 		<base href="<%=basePath%>">
 		<title>Table Data</title>
 		<style type="text/css">
