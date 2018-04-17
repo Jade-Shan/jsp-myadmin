@@ -7,32 +7,19 @@
 			response.sendRedirect("Index.jsp");
 		}
 %>
-    <%		
-    
-   
+<%		
     String server=Host;
     
 	PreparedStatement pstm = con.prepareStatement("SHOW DATABASES");
     ResultSet rst = pstm.executeQuery();	        
-    String[] dblist= null;
     int num_dbs=0;
-    if( dblist == null )
-    {
-
-
-        dblist=  new String[mysql_num_rows(rst)];
-        while (rst.next()) {
-                 dblist[num_dbs]=rst.getString(1);
-                 num_dbs++;
-        }
-        rst.close();
+    String[] dblist = new String[mysql_num_rows(rst)];
+    while (rst.next()) {
+             dblist[num_dbs]=rst.getString(1);
+             num_dbs++;
     }
-    else
-    {
-        num_dbs = dblist.length;
-    }
-   
-     %>
+    rst.close();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -51,10 +38,9 @@
         
         <ul> 
 <% 
-for(int i=0; i<num_dbs; i++) 
-    { 
+for(int i=0; i<num_dbs; i++) { 
        String localdb = dblist[i]; 
- %> 
+%> 
  
         <li> 
         <a href="right.jsp?server=<%=server%>&amp;db=<%=localdb%>" target="jspmain"><%=localdb%></a> 

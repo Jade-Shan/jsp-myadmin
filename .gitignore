@@ -1,4 +1,5 @@
 .classpath
+.sw*
 /bin
 /target
 .project
